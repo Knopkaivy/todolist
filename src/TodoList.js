@@ -89,7 +89,7 @@ class TodoList extends Component {
   }
   render() {
     let list = this.state.list.map((item) => (
-      <li>
+      <li key={item.id}>
         {item.editMode ? (
           <Form
             buttonValue="Save"
@@ -105,7 +105,6 @@ class TodoList extends Component {
             deleteItem={this.deleteItem}
             editModeOn={this.editModeOn}
             id={item.id}
-            key={item.id}
             text={item.text}
           />
         )}

@@ -10,6 +10,7 @@
 .Form input {
   border: none;
   box-sizing: border-box;
+  color: rgb(75, 74, 74);
   font-family: inherit;
   height: 2.5rem;
   padding-left: 1rem;
