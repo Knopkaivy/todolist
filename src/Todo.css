@@ -1,0 +1,17 @@
+.Todo {
+  background-color: #ff7d6a;
+  line-height: 2.5rem;
+  margin-bottom: 0.25rem;
+  padding: 0 2rem 0 2rem;
+}
+
+.Todo-completed {
+  color: grey;
+  text-decoration: line-through;
+}
+
+.Todo span {
+  float: right;
+  text-align: center;
+  width: 2.5rem;
+}

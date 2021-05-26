@@ -1,0 +1,30 @@
+.Form {
+  padding: 0 2rem 0 2rem;
+}
+
+.Form label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.Form input {
+  border: none;
+  box-sizing: border-box;
+  font-family: inherit;
+  height: 2.5rem;
+  padding-left: 1rem;
+  width: 20rem;
+  outline: none;
+}
+
+.Form button {
+  background-color: #ff7d6a;
+  border: none;
+  box-sizing: border-box;
+  color: white;
+  font-family: inherit;
+  height: 2.5rem;
+  padding: 0;
+  margin: 0;
+  width: 5rem;
+}
