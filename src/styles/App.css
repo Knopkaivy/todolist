@@ -32,3 +32,18 @@ body {
   height: 100%;
   object-fit: cover;
 }
+.nav {
+  height: 4rem;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.NavLink {
+  margin-right: 4rem;
+  font-size: 1.1rem;
+  color: var(--color-red);
+  text-decoration: none;
+}

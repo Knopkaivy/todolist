@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, NavLink } from 'react-router-dom';
 import BgImage from './imgs/bg-lg.jpg';
 import Login from './Login';
 import Register from './Register';
@@ -13,6 +13,11 @@ function App() {
       <div className="bg__container">
         <img src={BgImage} alt="decorative background" className="bg__image" />
       </div>
+      <nav className="nav">
+        <NavLink to="login" className="NavLink">
+          Login
+        </NavLink>
+      </nav>
 
       <Routes>
         <Route path="/" element={<TodoList />} />
