@@ -15,13 +15,20 @@
 }
 
 body {
-  /* background: grey url(imgs/bg-lg.jpg) no-repeat bottom center; */
-  background-size: cover;
-  /* object-fit: cover; */
+  background-color: var(--color-grey-light);
 }
 
 .App {
-  /* background-color: grey; */
   color: white;
   font-family: 'Poppins', sans-serif;
+}
+.bg__container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.bg__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
