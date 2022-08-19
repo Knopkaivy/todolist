@@ -1,7 +1,23 @@
+:root {
+  /* vars */
+  --color-white: #faf9f8;
+  --color-grey-light: #f0eeee;
+  --color-grey: #949393;
+  --color-green: #448c70;
+  --color-red: #c3110e;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
 body {
-  background: grey
-    url(https://images.unsplash.com/photo-1577574024120-48dde9effcee?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80)
-    no-repeat left top;
+  /* background: grey url(imgs/bg-lg.jpg) no-repeat bottom center; */
+  background-size: cover;
+  /* object-fit: cover; */
 }
 
 .App {
