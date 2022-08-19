@@ -19,7 +19,7 @@ body {
 }
 
 .App {
-  color: white;
+  color: var(--color-red);
   font-family: 'Poppins', sans-serif;
 }
 .bg__container {

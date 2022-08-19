@@ -10,7 +10,8 @@
 .Form input {
   border: none;
   box-sizing: border-box;
-  color: rgb(75, 74, 74);
+  background-color: var(--color-grey-light);
+  color: var(--color-grey);
   font-family: inherit;
   height: 2.5rem;
   padding-left: 1rem;
@@ -19,10 +20,10 @@
 }
 
 .Form button {
-  background-color: #ff7d6a;
+  background-color: var(--color-green);
   border: none;
   box-sizing: border-box;
-  color: white;
+  color: var(--color-white);
   font-family: inherit;
   height: 2.5rem;
   padding: 0;

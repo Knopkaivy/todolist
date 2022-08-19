@@ -1,12 +1,11 @@
 .Todo {
-  background-color: #ff7d6a;
+  background-color: var(--color-grey-light);
   line-height: 2.5rem;
-  /* margin-bottom: 0.25rem; */
   padding: 0 2rem 0 2rem;
 }
 
 .Todo-completed {
-  color: grey;
+  color: var(--color-grey);
   text-decoration: line-through;
 }
 
@@ -14,4 +13,5 @@
   float: right;
   text-align: center;
   width: 2.5rem;
+  color: var(--color-grey);
 }
