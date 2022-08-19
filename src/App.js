@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import BgImage from './imgs/bg-lg.jpg';
-import './App.css';
+import './styles/App.css';
 import TodoList from './TodoList';
 
 function App() {
