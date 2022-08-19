@@ -18,13 +18,14 @@ function App() {
           Login
         </NavLink>
       </nav>
-
-      <Routes>
-        <Route path="/" element={<TodoList />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="reset" element={<Reset />} />
-      </Routes>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<TodoList />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="reset" element={<Reset />} />
+        </Routes>
+      </div>
     </div>
   );
 }
