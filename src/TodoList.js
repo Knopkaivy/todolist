@@ -116,7 +116,7 @@ class TodoList extends Component {
         <ul>{list}</ul>
         <Form
           addItem={this.addItem}
-          label="New Todo"
+          // label="New Todo"
           placeholder="Do New Things"
           buttonValue="Add"
         />

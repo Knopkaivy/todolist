@@ -37,9 +37,9 @@ class Form extends Component {
   render() {
     return (
       <form className="Form" onSubmit={this.handleSubmit}>
-        {this.props.label && (
+        {/* {this.props.label && (
           <label htmlFor="formInput">{this.props.label}</label>
-        )}
+        )} */}
         <input
           id="formInput"
           onChange={this.handleChange}
