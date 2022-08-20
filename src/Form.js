@@ -46,8 +46,9 @@ class Form extends Component {
           type="text"
           placeholder={this.props.placeholder ? this.props.placeholder : null}
           value={this.state.value}
+          className="inpt"
         />
-        <button>{this.props.buttonValue}</button>
+        <button className="btn btn-green">{this.props.buttonValue}</button>
       </form>
     );
   }

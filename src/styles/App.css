@@ -59,4 +59,46 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container__auth {
+  max-width: 375px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 30px;
+}
+.inpt {
+  border: none;
+  box-sizing: border-box;
+  background-color: var(--color-grey-light);
+  color: var(--color-grey);
+  font-family: inherit;
+  font-size: inherit;
+  height: 2.5rem;
+  padding-left: 1rem;
+  outline: none;
+}
+.inpt__auth {
+  margin-bottom: 10px;
+}
+.btn {
+  border: none;
+  box-sizing: border-box;
+  color: var(--color-white);
+  font-family: inherit;
+  height: 2.5rem;
+  padding: 0;
+}
+.btn-green {
+  background-color: var(--color-green);
+}
+.btn-red {
+  background-color: var(--color-red);
+}
+.btn__auth {
+  margin-bottom: 10px;
+  font-size: inherit;
 }
