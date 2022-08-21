@@ -13,7 +13,7 @@ const Login = () => {
       // maybe trigger a loading screen
       return;
     }
-    if (user) navigate('/dashboard');
+    if (user) navigate('/');
   }, [user, loading]);
   return (
     <div className="container__auth">
