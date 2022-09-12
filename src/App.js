@@ -8,6 +8,8 @@ import {
   signInWithGoogle,
 } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import firestore from './FirebaseConfig';
+import FirebaseAuthService from './FirebaseAuthService';
 import BgImage from './imgs/bg-lg.jpg';
 import Login from './Login';
 import Register from './Register';
@@ -24,7 +26,12 @@ function App() {
       </div>
       <nav className="nav">
         {user ? (
-          <div className="NavLink">{user.displayName}</div>
+          <>
+            <div className="NavLink">{user.displayName}</div>
+            <button type="button" onClick={FirebaseAuthService.logoutUser}>
+              Logout
+            </button>
+          </>
         ) : (
           <NavLink to="login" className="NavLink">
             Login

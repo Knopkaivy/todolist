@@ -10,8 +10,23 @@ import {
 
 const auth = firebase.auth;
 
-const registerUser = (email, password) => {
-  return createUserWithEmailAndPassword(auth, email, password);
+// const registerUser = (email, password) => {
+//   return createUserWithEmailAndPassword(auth, email, password);
+// };
+const registerUser = async (name, email, password) => {
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const user = res.user;
+    // await addDoc(collection(db, 'users'), {
+    //   uid: user.uid,
+    //   name,
+    //   authProvider: 'local',
+    //   email,
+    // });
+  } catch (error) {
+    console.error(error);
+    alert(error.message);
+  }
 };
 
 const loginUser = (email, password) => {
@@ -27,6 +42,16 @@ const loginWithGoogle = () => {
   return signInWithPopup(auth, provider);
 };
 
+const sendPasswordReset = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert('Please check your email for password reset link');
+  } catch (error) {
+    console.error(error);
+    alert(error.message);
+  }
+};
+
 const subscribeToAuthChanges = (handleAuthChange) => {
   onAuthStateChanged(auth, (user) => {
     handleAuthChange(user);
@@ -37,9 +62,7 @@ const FirebaseAuthService = {
   registerUser,
   loginUser,
   logoutUser,
-  sendPasswordResetEmail: (email) => {
-    sendPasswordResetEmail(auth, email);
-  },
+  sendPasswordReset,
   loginWithGoogle,
   subscribeToAuthChanges,
 };

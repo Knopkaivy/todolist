@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  auth,
-  registerWithEmailAndPassword,
-  signInWithGoogle,
-} from './firebase';
+import firebase from './FirebaseConfig';
+// import {
+//   auth,
+//   registerWithEmailAndPassword,
+//   signInWithGoogle,
+// } from './firebase';
+import FirebaseAuthService from './FirebaseAuthService';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(firebase.auth);
   const navigate = useNavigate();
   const register = () => {
     if (!name) alert('Please enter name');
-    registerWithEmailAndPassword(name, email, password);
+    FirebaseAuthService.registerUser(name, email, password);
   };
   useEffect(() => {
     if (loading) return;
@@ -47,7 +49,10 @@ const Register = () => {
       <button className="btn btn-green btn__auth" onClick={register}>
         Register
       </button>
-      <button className="btn btn-red btn__auth" onClick={signInWithGoogle}>
+      <button
+        className="btn btn-red btn__auth"
+        onClick={FirebaseAuthService.loginWithGoogle}
+      >
         Register with Google
       </button>
       <div>
