@@ -6,23 +6,26 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
+  updateProfile,
 } from 'firebase/auth';
+import FirebaseFirestoreService from './FirebaseFirestoreService';
 
 const auth = firebase.auth;
 
-// const registerUser = (email, password) => {
-//   return createUserWithEmailAndPassword(auth, email, password);
-// };
 const registerUser = async (name, email, password) => {
   try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    // await addDoc(collection(db, 'users'), {
-    //   uid: user.uid,
-    //   name,
-    //   authProvider: 'local',
-    //   email,
-    // });
+    await createUserWithEmailAndPassword(auth, email, password);
+    const user = auth.currentUser;
+    await updateProfile(user, {
+      displayName: name,
+    });
+    const newUser = {
+      uid: user.uid,
+      name,
+      authProvider: 'local',
+      email,
+    };
+    await FirebaseFirestoreService.createDocument('users', newUser);
   } catch (error) {
     console.error(error);
     alert(error.message);
@@ -37,9 +40,35 @@ const logoutUser = () => {
   return auth.signOut();
 };
 
-const loginWithGoogle = () => {
+const loginWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
-  return signInWithPopup(auth, provider);
+  try {
+    const res = await signInWithPopup(auth, provider);
+    const user = res.user;
+    const userQuery = [
+      {
+        field: 'uid',
+        condition: '==',
+        value: user.uid,
+      },
+    ];
+    const docs = await FirebaseFirestoreService.readDocuments({
+      collection: 'users',
+      queries: userQuery,
+    });
+    if (docs.docs.length === 0) {
+      const newUser = {
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: 'google',
+        email: user.email,
+      };
+      await FirebaseFirestoreService.createDocument('users', newUser);
+    }
+  } catch (error) {
+    console.error(error);
+    alert(error.message);
+  }
 };
 
 const sendPasswordReset = async (email) => {

@@ -53,7 +53,7 @@ const Register = () => {
         className="btn btn-red btn__auth"
         onClick={FirebaseAuthService.loginWithGoogle}
       >
-        Register with Google
+        Login with Google
       </button>
       <div>
         Already have an account? <Link to="/login">Login</Link> now.

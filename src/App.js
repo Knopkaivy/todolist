@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
-import {
-  app,
-  auth,
-  db,
-  logInWithEmailAndPassword,
-  signInWithGoogle,
-} from './firebase';
+// import {
+//   app,
+//   auth,
+//   db,
+//   logInWithEmailAndPassword,
+//   signInWithGoogle,
+// } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firestore from './FirebaseConfig';
 import FirebaseAuthService from './FirebaseAuthService';
@@ -18,7 +18,7 @@ import './styles/App.css';
 import TodoList from './TodoList';
 
 function App() {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(firestore.auth);
   return (
     <div className="App">
       <div className="bg__container">
@@ -28,7 +28,11 @@ function App() {
         {user ? (
           <>
             <div className="NavLink">{user.displayName}</div>
-            <button type="button" onClick={FirebaseAuthService.logoutUser}>
+            <button
+              type="button"
+              onClick={FirebaseAuthService.logoutUser}
+              className="btn btn-red"
+            >
               Logout
             </button>
           </>
