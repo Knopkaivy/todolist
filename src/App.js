@@ -1,12 +1,5 @@
 import * as React from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
-// import {
-//   app,
-//   auth,
-//   db,
-//   logInWithEmailAndPassword,
-//   signInWithGoogle,
-// } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firestore from './FirebaseConfig';
 import FirebaseAuthService from './FirebaseAuthService';
