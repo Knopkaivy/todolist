@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import firestore from './FirebaseConfig';
+import firebase from './FirebaseConfig';
 import './styles/Form.css';
 
 const Form = ({
@@ -13,6 +13,7 @@ const Form = ({
   placeholder,
 }) => {
   const [value, setValue] = useState('');
+  const [user] = useAuthState(firebase.auth);
 
   useEffect(() => {
     if (itemValue) {
@@ -21,7 +22,12 @@ const Form = ({
   }, [itemValue]);
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    if (!user) {
+      alert('Please login to add new todo');
+      return;
+    } else {
+      setValue(event.target.value);
+    }
   };
 
   const handleSubmit = (event) => {
