@@ -1,40 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './styles/Todo.css';
 
-class Todo extends Component {
-  constructor(props) {
-    super(props);
-    this.handleCompleteItem = this.handleCompleteItem.bind(this);
-    this.handleDeleteItem = this.handleDeleteItem.bind(this);
-    this.handleEditModeOn = this.handleEditModeOn.bind(this);
-  }
-  handleCompleteItem(event) {
-    this.props.completeItem(this.props.id);
-  }
-  handleDeleteItem(event) {
+const Todo = ({
+  completed,
+  completeItem,
+  deleteItem,
+  editModeOn,
+  id,
+  text,
+}) => {
+  const handleCompleteItem = (event) => {
+    completeItem(id);
+  };
+  const handleDeleteItem = (event) => {
     event.stopPropagation();
-    this.props.deleteItem(this.props.id);
-  }
-  handleEditModeOn(event) {
+    deleteItem(id);
+  };
+  const handleEditModeOn = (event) => {
     event.stopPropagation();
-    this.props.editModeOn(this.props.id);
-  }
-  render() {
-    return (
-      <div
-        onClick={this.handleCompleteItem}
-        className={`Todo ${this.props.completed ? 'Todo-completed' : ''}`}
-      >
-        {this.props.text}
-        <span onClick={this.handleDeleteItem}>
-          <i className="fas fa-trash"></i>
-        </span>
-        <span onClick={this.handleEditModeOn}>
-          <i className="fas fa-pen"></i>
-        </span>
-      </div>
-    );
-  }
-}
+    editModeOn(id);
+  };
+  return (
+    <div
+      onClick={handleCompleteItem}
+      className={`Todo ${completed ? 'Todo-completed' : ''}`}
+    >
+      {text}
+      <span onClick={handleDeleteItem}>
+        <i className="fas fa-trash"></i>
+      </span>
+      <span onClick={handleEditModeOn}>
+        <i className="fas fa-pen"></i>
+      </span>
+    </div>
+  );
+};
 
 export default Todo;
