@@ -1,4 +1,6 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import firebase from './FirebaseConfig';
 import './styles/Todo.css';
 
 const Todo = ({
@@ -9,8 +11,12 @@ const Todo = ({
   id,
   text,
 }) => {
+  const [user] = useAuthState(firebase.auth);
+
   const handleCompleteItem = (event) => {
-    completeItem(id);
+    if (user) {
+      completeItem(id);
+    }
   };
   const handleDeleteItem = (event) => {
     event.stopPropagation();
@@ -26,12 +32,16 @@ const Todo = ({
       className={`Todo ${completed ? 'Todo-completed' : ''}`}
     >
       {text}
-      <span onClick={handleDeleteItem}>
-        <i className="fas fa-trash"></i>
-      </span>
-      <span onClick={handleEditModeOn}>
-        <i className="fas fa-pen"></i>
-      </span>
+      {user && (
+        <>
+          <span onClick={handleDeleteItem}>
+            <i className="fas fa-trash"></i>
+          </span>
+          <span onClick={handleEditModeOn}>
+            <i className="fas fa-pen"></i>
+          </span>
+        </>
+      )}
     </div>
   );
 };
