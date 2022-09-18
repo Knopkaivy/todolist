@@ -8,6 +8,7 @@ import {
   where,
   orderBy,
   limit,
+  setDoc,
   startAfter,
   getDocs,
   updateDoc,
@@ -16,8 +17,8 @@ import {
 
 const firestore = firebase.firestore;
 
-const createDocument = (collection, document) => {
-  return addDoc(firestoreCollection(firestore, collection), document);
+const createDocument = (collection, id, document) => {
+  return setDoc(doc(firestoreCollection(firestore, collection), id), document);
 };
 
 const readDocument = (collection, id) => {
