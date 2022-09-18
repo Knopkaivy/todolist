@@ -25,7 +25,11 @@ const registerUser = async (name, email, password) => {
       authProvider: 'local',
       email,
     };
-    await FirebaseFirestoreService.createDocument('users', newUser);
+    await FirebaseFirestoreService.createDocument(
+      'users',
+      newUser.uid,
+      newUser
+    );
   } catch (error) {
     console.error(error);
     alert(error.message);
@@ -63,7 +67,11 @@ const loginWithGoogle = async () => {
         authProvider: 'google',
         email: user.email,
       };
-      await FirebaseFirestoreService.createDocument('users', newUser);
+      await FirebaseFirestoreService.createDocument(
+        'users',
+        newUser.uid,
+        newUser
+      );
     }
   } catch (error) {
     console.error(error);

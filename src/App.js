@@ -1,8 +1,9 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firestore from './FirebaseConfig';
 import FirebaseAuthService from './FirebaseAuthService';
+import FirebaseFirestoreService from './FirebaseFirestoreService';
 import BgImage from './imgs/bg-lg.jpg';
 import Login from './Login';
 import Register from './Register';
@@ -12,6 +13,16 @@ import TodoList from './TodoList';
 
 function App() {
   const [user, loading, error] = useAuthState(firestore.auth);
+
+  const handleAddTodo = (document) => {
+    const subCollectionRef = `users/${user.uid}/todos`;
+    FirebaseFirestoreService.createDocument(
+      subCollectionRef,
+      document.id,
+      document
+    );
+  };
+
   return (
     <div className="App">
       <div className="bg__container">
@@ -39,7 +50,10 @@ function App() {
       </nav>
       <div className="container">
         <Routes>
-          <Route path="/" element={<TodoList />} />
+          <Route
+            path="/"
+            element={<TodoList handleAddTodo={handleAddTodo} />}
+          />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="reset" element={<Reset />} />

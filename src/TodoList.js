@@ -45,6 +45,7 @@ class TodoList extends Component {
     this.setState((prevState) => ({
       list: [...prevState.list, additionalItem],
     }));
+    this.props.handleAddTodo(additionalItem);
   }
   completeItem(id) {
     let newState = this.state.list.filter((item) => {
@@ -97,6 +98,7 @@ class TodoList extends Component {
             editItem={this.editItem}
             id={item.id}
             itemValue={item.text}
+            handleAddTodo={this.props.handleAddTodo}
           />
         ) : (
           <Todo
