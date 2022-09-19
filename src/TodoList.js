@@ -8,26 +8,7 @@ class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: [
-        {
-          id: '1',
-          text: 'A ship in harbor is safe,',
-          completed: false,
-          editMode: false,
-        },
-        {
-          id: '2',
-          text: 'but that is not',
-          completed: false,
-          editMode: false,
-        },
-        {
-          id: '3',
-          text: 'what ships are built for.',
-          completed: false,
-          editMode: false,
-        },
-      ],
+      list: this.props.todos,
     };
     this.completeItem = this.completeItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
