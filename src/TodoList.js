@@ -1,35 +1,25 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Todo from './Todo';
 import Form from './Form';
 import './styles/TodoList.css';
 
-class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: this.props.todos,
-    };
-    this.completeItem = this.completeItem.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
-    this.addItem = this.addItem.bind(this);
-    this.editModeOn = this.editModeOn.bind(this);
-    this.editItem = this.editItem.bind(this);
-  }
-  addItem(newVal) {
+const TodoList = ({ handleAddTodo, todos }) => {
+  const [list, setList] = useState(todos);
+
+  const addItem = (newVal) => {
     let additionalItem = {
       id: uuidv4(),
       text: newVal,
       completed: false,
       editMode: false,
     };
-    this.setState((prevState) => ({
-      list: [...prevState.list, additionalItem],
-    }));
-    this.props.handleAddTodo(additionalItem);
-  }
-  completeItem(id) {
-    let newState = this.state.list.filter((item) => {
+    setList([...list, additionalItem]);
+    handleAddTodo(additionalItem);
+  };
+
+  const completeItem = (id) => {
+    const updatedList = list.filter((item) => {
       if (item.id !== id) return item;
       else {
         let newItem = item;
@@ -37,16 +27,18 @@ class TodoList extends Component {
         return newItem;
       }
     });
-    this.setState({ list: [...newState] });
-  }
-  deleteItem(id) {
-    let newState = this.state.list.filter((item) => {
+    setList([...updatedList]);
+  };
+
+  const deleteItem = (id) => {
+    const updatedList = list.filter((item) => {
       return item.id !== id;
     });
-    this.setState({ list: [...newState] });
-  }
-  editModeOn(id) {
-    let newState = this.state.list.filter((item) => {
+    setList([...updatedList]);
+  };
+
+  const editModeOn = (id) => {
+    const updatedList = list.filter((item) => {
       if (item.id !== id) return item;
       else {
         let newItem = item;
@@ -54,10 +46,11 @@ class TodoList extends Component {
         return newItem;
       }
     });
-    this.setState({ list: [...newState] });
-  }
-  editItem(newVal, id) {
-    let newState = this.state.list.filter((item) => {
+    setList([...updatedList]);
+  };
+
+  const editItem = (newVal, id) => {
+    const newList = list.filter((item) => {
       if (item.id !== id) return item;
       else {
         let newItem = item;
@@ -67,45 +60,37 @@ class TodoList extends Component {
         return newItem;
       }
     });
-    this.setState({ list: [...newState] });
-  }
-  render() {
-    let list = this.state.list.map((item) => (
-      <li key={item.id}>
-        {item.editMode ? (
-          <Form
-            buttonValue="Save"
-            deleteItem={this.deleteItem}
-            editItem={this.editItem}
-            id={item.id}
-            itemValue={item.text}
-            handleAddTodo={this.props.handleAddTodo}
-          />
-        ) : (
-          <Todo
-            completed={item.completed}
-            completeItem={this.completeItem}
-            deleteItem={this.deleteItem}
-            editModeOn={this.editModeOn}
-            id={item.id}
-            text={item.text}
-          />
-        )}
-      </li>
-    ));
-    return (
-      <section className="TodoList">
-        <h1>Todo List</h1>
-        <ul>{list}</ul>
+    setList([...newList]);
+  };
+  const itemList = list.map((item) => (
+    <li key={item.id}>
+      {item.editMode ? (
         <Form
-          addItem={this.addItem}
-          // label="New Todo"
-          placeholder="Do New Things"
-          buttonValue="Add"
+          buttonValue="Save"
+          deleteItem={deleteItem}
+          editItem={editItem}
+          id={item.id}
+          itemValue={item.text}
         />
-      </section>
-    );
-  }
-}
+      ) : (
+        <Todo
+          completed={item.completed}
+          completeItem={completeItem}
+          deleteItem={deleteItem}
+          editModeOn={editModeOn}
+          id={item.id}
+          text={item.text}
+        />
+      )}
+    </li>
+  ));
+  return (
+    <section className="TodoList">
+      <h1>Todo List</h1>
+      <ul>{itemList}</ul>
+      <Form addItem={addItem} placeholder="Do New Things" buttonValue="Add" />
+    </section>
+  );
+};
 
 export default TodoList;
