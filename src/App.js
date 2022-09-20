@@ -120,17 +120,12 @@ function App() {
   };
 
   const editItem = (newVal, id) => {
-    const newList = todos.filter((item) => {
-      if (item.id !== id) return item;
-      else {
-        let newItem = item;
-        newItem.text = newVal;
-        newItem.editMode = false;
-        newItem.completed = false;
-        return newItem;
-      }
-    });
-    setTodos([...newList]);
+    const newItem = todos.find((item) => item.id === id);
+    newItem.text = newVal;
+    newItem.editMode = false;
+    newItem.completed = false;
+
+    handleUpdateTodo(newItem, id);
   };
 
   return (
