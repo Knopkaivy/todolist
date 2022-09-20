@@ -21,6 +21,8 @@ function App() {
   useEffect(() => {
     if (user) {
       setTodos(handleFetchTodos());
+    } else {
+      setTodos(starterTodos);
     }
   }, [user]);
 
