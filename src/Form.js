@@ -4,10 +4,10 @@ import firebase from './FirebaseConfig';
 import './styles/Form.css';
 
 const Form = ({
-  addItem,
   buttonValue,
   deleteItem,
   editItem,
+  handleAddTodo,
   id,
   itemValue,
   placeholder,
@@ -40,7 +40,7 @@ const Form = ({
       }
     } else {
       if (value !== '') {
-        addItem(value);
+        handleAddTodo(value);
         setValue('');
       } else return;
     }

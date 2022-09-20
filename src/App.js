@@ -4,23 +4,133 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import firestore from './FirebaseConfig';
 import FirebaseAuthService from './FirebaseAuthService';
 import FirebaseFirestoreService from './FirebaseFirestoreService';
-import BgImage from './imgs/bg-lg.jpg';
+import { v4 as uuidv4 } from 'uuid';
+import { starterTodos } from './starter';
 import Login from './Login';
 import Register from './Register';
 import Reset from './Reset';
-import './styles/App.css';
 import TodoList from './TodoList';
+
+import BgImage from './imgs/bg-lg.jpg';
+import './styles/App.css';
 
 function App() {
   const [user, loading, error] = useAuthState(firestore.auth);
+  const [todos, setTodos] = useState(starterTodos);
 
-  const handleAddTodo = (document) => {
+  useEffect(() => {
+    if (user) {
+      setTodos(handleFetchTodos());
+    }
+  }, [user]);
+
+  const fetchTodos = async (cursorId = '') => {
+    const queries = [];
+    // const orderByField = 'publishDate';
+    let fetchedTodos = [];
+    try {
+      const response = await FirebaseFirestoreService.readDocuments({
+        collection: `users/${user.uid}/todos`,
+        queries: queries,
+        // orderByField: orderByField,
+        cursorId: cursorId,
+      });
+      const newTodos = response.docs.map((todoDoc) => {
+        const data = todoDoc.data();
+        // data.publishDate = new Date(data.publishDate.seconds * 1000);
+        return { ...data };
+      });
+
+      if (cursorId) {
+        fetchedTodos = [...todos, ...newTodos];
+      } else {
+        fetchedTodos = [...newTodos];
+      }
+      return fetchedTodos;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  };
+
+  const handleFetchTodos = async (cursorId = '') => {
+    try {
+      const fetchedTodos = await fetchTodos(cursorId);
+      console.log('fetchedTodos', fetchedTodos);
+      setTodos(fetchedTodos);
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  };
+
+  const handleAddTodo = (value) => {
     const subCollectionRef = `users/${user.uid}/todos`;
+    let newTodo = {
+      id: uuidv4(),
+      text: value,
+      completed: false,
+      editMode: false,
+    };
     FirebaseFirestoreService.createDocument(
       subCollectionRef,
-      document.id,
-      document
+      newTodo.id,
+      newTodo
     );
+    handleFetchTodos();
+  };
+
+  const handleUpdateTodo = async (newTodo, todoId) => {
+    try {
+      await FirebaseFirestoreService.updateDocument(
+        `users/${user.uid}/todos`,
+        todoId,
+        newTodo
+      );
+      handleFetchTodos();
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  };
+
+  const completeItem = (id) => {
+    const newItem = todos.find((item) => item.id === id);
+    newItem.completed = newItem.completed ? false : true;
+    handleUpdateTodo(newItem, id);
+  };
+
+  const deleteItem = (id) => {
+    const updatedList = todos.filter((item) => {
+      return item.id !== id;
+    });
+    setTodos([...updatedList]);
+  };
+
+  const editModeOn = (id) => {
+    const updatedList = todos.filter((item) => {
+      if (item.id !== id) return item;
+      else {
+        let newItem = item;
+        newItem.editMode = true;
+        return newItem;
+      }
+    });
+    setTodos([...updatedList]);
+  };
+
+  const editItem = (newVal, id) => {
+    const newList = todos.filter((item) => {
+      if (item.id !== id) return item;
+      else {
+        let newItem = item;
+        newItem.text = newVal;
+        newItem.editMode = false;
+        newItem.completed = false;
+        return newItem;
+      }
+    });
+    setTodos([...newList]);
   };
 
   return (
@@ -52,7 +162,16 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<TodoList handleAddTodo={handleAddTodo} />}
+            element={
+              <TodoList
+                handleAddTodo={handleAddTodo}
+                completeItem={completeItem}
+                deleteItem={deleteItem}
+                editModeOn={editModeOn}
+                editItem={editItem}
+                todos={todos}
+              />
+            }
           />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
