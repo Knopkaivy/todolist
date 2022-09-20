@@ -17,13 +17,16 @@ import './styles/App.css';
 function App() {
   const [user, loading, error] = useAuthState(firestore.auth);
   const [todos, setTodos] = useState(starterTodos);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     if (user) {
-      setTodos(handleFetchTodos());
+      handleFetchTodos();
     } else {
       setTodos(starterTodos);
     }
+    setIsLoading(false);
   }, [user]);
 
   const fetchTodos = async (cursorId = '') => {
@@ -176,6 +179,7 @@ function App() {
                 deleteItem={deleteItem}
                 editModeOn={editModeOn}
                 editItem={editItem}
+                isLoading={isLoading}
                 todos={todos}
               />
             }

@@ -1,6 +1,7 @@
 import React from 'react';
 import Todo from './Todo';
 import Form from './Form';
+import LoadingSpinner from './LoadingSpinner';
 import './styles/TodoList.css';
 
 const TodoList = ({
@@ -9,6 +10,7 @@ const TodoList = ({
   deleteItem,
   editModeOn,
   editItem,
+  isLoading,
   todos,
 }) => {
   let itemList;
@@ -43,7 +45,7 @@ const TodoList = ({
   return (
     <section className="TodoList">
       <h1>Todo List</h1>
-      <ul>{itemList}</ul>
+      {isLoading ? <LoadingSpinner /> : <ul>{itemList}</ul>}
       <Form
         handleAddTodo={handleAddTodo}
         placeholder="Do New Things"
