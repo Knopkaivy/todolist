@@ -100,7 +100,17 @@ function App() {
     handleUpdateTodo(newItem, id);
   };
 
-  const deleteItem = (id) => {
+  const deleteItem = async (id) => {
+    try {
+      await FirebaseFirestoreService.deleteDocument(
+        `users/${user.uid}/todos`,
+        id
+      );
+      handleFetchTodos();
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
     const updatedList = todos.filter((item) => {
       return item.id !== id;
     });
