@@ -31,13 +31,14 @@ function App() {
 
   const fetchTodos = async (cursorId = '') => {
     const queries = [];
-    // const orderByField = 'publishDate';
+    const orderByField = 'publishDate';
     let fetchedTodos = [];
     try {
       const response = await FirebaseFirestoreService.readDocuments({
         collection: `users/${user.uid}/todos`,
         queries: queries,
-        // orderByField: orderByField,
+        orderByField: orderByField,
+        orderByDirection: 'asc',
         cursorId: cursorId,
       });
       const newTodos = response.docs.map((todoDoc) => {
@@ -74,6 +75,7 @@ function App() {
     let newTodo = {
       id: uuidv4(),
       text: value,
+      publishDate: new Date(),
       completed: false,
       editMode: false,
     };
