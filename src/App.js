@@ -151,23 +151,25 @@ function App() {
         <img src={BgImage} alt="decorative background" className="bg__image" />
       </div>
       <nav className="nav">
-        <div className="nav__itemContainer">
-          {user ? (
-            <>
-              <div className="nav__item">{user.displayName}</div>
-              <button
-                type="button"
-                onClick={FirebaseAuthService.logoutUser}
-                className="btn btn__logout nav__item nav__item-hidden"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <NavLink to="login" className="nav__item NavLink">
-              Login
-            </NavLink>
-          )}
+        <div className="nav__container">
+          <div className="nav__itemContainer">
+            {user ? (
+              <>
+                <div className="nav__item">{user.displayName}</div>
+                <button
+                  type="button"
+                  onClick={FirebaseAuthService.logoutUser}
+                  className="btn btn__logout nav__item nav__item-hidden"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <NavLink to="login" className="nav__item NavLink">
+                Login
+              </NavLink>
+            )}
+          </div>
         </div>
       </nav>
       <div className="container">

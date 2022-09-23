@@ -1,17 +1,15 @@
 .Form {
-  padding: 0 2rem 0 2rem;
-}
-
-.Form label {
-  display: block;
-  margin-bottom: 0.25rem;
+  width: 100%;
+  display: flex;
+  /* margin-bottom: 2rem; */
 }
 
 .Form input {
-  width: 20rem;
+  flex-grow: 1;
+  padding-left: 2rem;
 }
 
 .Form button {
-  width: 5rem;
-  margin: 0;
+  width: 8rem;
+  align-self: flex-end;
 }

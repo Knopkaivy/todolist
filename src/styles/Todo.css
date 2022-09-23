@@ -1,7 +1,7 @@
 .Todo {
   background-color: var(--color-grey-light);
   line-height: 2.5rem;
-  padding: 0 2rem 0 2rem;
+  padding: 0 2rem;
 }
 
 .Todo-completed {

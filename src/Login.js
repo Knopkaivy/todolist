@@ -18,7 +18,7 @@ const Login = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading]);
   return (
-    <div className="container__auth">
+    <div className="container container__auth">
       <input
         type="text"
         className="inpt inpt__auth"
