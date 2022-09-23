@@ -8,7 +8,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [user, loading, error] = useAuthState(firebase.auth);
+  const [user, loading] = useAuthState(firebase.auth);
   const navigate = useNavigate();
   const register = () => {
     if (!name) alert('Please enter name');
@@ -17,6 +17,7 @@ const Register = () => {
   useEffect(() => {
     if (loading) return;
     if (user) navigate('/', { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading]);
   return (
     <div className="container__auth">

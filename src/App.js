@@ -15,8 +15,8 @@ import BgImage from './imgs/bg-lg.jpg';
 import './styles/App.css';
 
 function App() {
-  const [user, loading, error] = useAuthState(firestore.auth);
-  const [todos, setTodos] = useState(starterTodos);
+  const [user] = useAuthState(firestore.auth);
+  const [todos, setTodos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ function App() {
       setTodos(starterTodos);
     }
     setIsLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const fetchTodos = async (cursorId = '') => {
@@ -62,7 +63,6 @@ function App() {
   const handleFetchTodos = async (cursorId = '') => {
     try {
       const fetchedTodos = await fetchTodos(cursorId);
-      console.log('fetchedTodos', fetchedTodos);
       setTodos(fetchedTodos);
     } catch (error) {
       console.error(error.message);

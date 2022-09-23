@@ -7,11 +7,12 @@ import FirebaseAuthService from './FirebaseAuthService';
 
 const Reset = () => {
   const [email, setEmail] = useState('');
-  const [user, loading, error] = useAuthState(firebase.auth);
+  const [user, loading] = useAuthState(firebase.auth);
   const navigate = useNavigate();
   useEffect(() => {
     if (loading) return;
     if (user) navigate('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading]);
   return (
     <div className="container__auth">
