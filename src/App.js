@@ -43,6 +43,7 @@ function App() {
       });
       const newTodos = response.docs.map((todoDoc) => {
         const data = todoDoc.data();
+        // data.publishDate = new Date(data.publishDate.seconds * 1000);
         return { ...data };
       });
 
@@ -61,6 +62,7 @@ function App() {
   const handleFetchTodos = async (cursorId = '') => {
     try {
       const fetchedTodos = await fetchTodos(cursorId);
+      console.log('fetchedTodos', fetchedTodos);
       setTodos(fetchedTodos);
     } catch (error) {
       console.error(error.message);

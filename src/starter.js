@@ -1,18 +1,18 @@
 export const starterTodos = [
   {
-    id: 'starter-1',
+    id: '1',
     text: 'A ship in harbor is safe,',
     completed: false,
     editMode: false,
   },
   {
-    id: 'starter-2',
+    id: '2',
     text: 'but that is not',
     completed: false,
     editMode: false,
   },
   {
-    id: 'starter-3',
+    id: '3',
     text: 'what ships are built for.',
     completed: false,
     editMode: false,

@@ -9,7 +9,6 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import FirebaseFirestoreService from './FirebaseFirestoreService';
-import { starterTodos } from './starter';
 
 const auth = firebase.auth;
 
@@ -31,7 +30,6 @@ const registerUser = async (name, email, password) => {
       newUser.uid,
       newUser
     );
-    addStarterTodos(user.uid);
   } catch (error) {
     console.error(error);
     alert(error.message);
@@ -74,7 +72,6 @@ const loginWithGoogle = async () => {
         newUser.uid,
         newUser
       );
-      addStarterTodos(user.uid);
     }
   } catch (error) {
     console.error(error);
@@ -96,24 +93,6 @@ const subscribeToAuthChanges = (handleAuthChange) => {
   onAuthStateChanged(auth, (user) => {
     handleAuthChange(user);
   });
-};
-
-const addStarterTodos = async (userId) => {
-  console.log(starterTodos);
-  for (let item of starterTodos) {
-    console.log(item);
-    item.publishDate = new Date();
-    try {
-      await FirebaseFirestoreService.createDocument(
-        `users/${userId}/todos`,
-        item.id,
-        item
-      );
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  }
 };
 
 const FirebaseAuthService = {
