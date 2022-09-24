@@ -1,36 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
-import firebase from './FirebaseConfig';
-import FirebaseAuthService from './FirebaseAuthService';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import firebase from '../FirebaseConfig';
+import FirebaseAuthService from '../FirebaseAuthService';
 
-const Register = () => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
   const [user, loading] = useAuthState(firebase.auth);
   const navigate = useNavigate();
-  const register = () => {
-    if (!name) {
-      alert('Please enter name');
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
       return;
     }
-    FirebaseAuthService.registerUser(name, email, password);
-  };
-  useEffect(() => {
-    if (loading) return;
-    if (user) navigate('/', { replace: true });
+    if (user) navigate('/');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading]);
   return (
     <div className="container container__auth">
-      <input
-        type="text"
-        className="inpt inpt__auth"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Full Name"
-      />
       <input
         type="text"
         className="inpt inpt__auth"
@@ -45,8 +33,11 @@ const Register = () => {
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
       />
-      <button className="btn btn-green btn__auth" onClick={register}>
-        Register
+      <button
+        className="btn btn-green btn__auth"
+        onClick={() => FirebaseAuthService.loginUser(email, password)}
+      >
+        Login
       </button>
       <button
         className="btn btn-red btn__auth"
@@ -55,10 +46,13 @@ const Register = () => {
         Login with Google
       </button>
       <div>
-        Already have an account? <Link to="/login">Login</Link> now.
+        <Link to="/reset">Forgot Password</Link>
+      </div>
+      <div>
+        Don't have an account? <Link to="/register">Register</Link> now.
       </div>
     </div>
   );
 };
 
-export default Register;
+export default Login;

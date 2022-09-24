@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
-import FirebaseAuthService from './FirebaseAuthService';
-import './styles/Nav.css';
+import FirebaseAuthService from '../FirebaseAuthService';
+import '../styles/Nav.css';
 
 const Nav = ({ user }) => {
   let location = useLocation();

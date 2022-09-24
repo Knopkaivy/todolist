@@ -5,11 +5,11 @@ import firestore from './FirebaseConfig';
 import FirebaseFirestoreService from './FirebaseFirestoreService';
 import { v4 as uuidv4 } from 'uuid';
 import { starterTodos } from './starter';
-import Nav from './Nav';
-import Login from './Login';
-import Register from './Register';
-import Reset from './Reset';
-import TodoList from './TodoList';
+import Nav from './components/Nav';
+import Login from './components/Login';
+import Register from './components/Register';
+import Reset from './components/Reset';
+import TodoList from './components/TodoList';
 
 import BgImage from './imgs/bg-lg.jpg';
 import './styles/App.css';
@@ -164,7 +164,6 @@ function App() {
                 editItem={editItem}
                 isLoading={isLoading}
                 todos={todos}
-                user={user}
               />
             }
           />

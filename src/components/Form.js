@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import firebase from './FirebaseConfig';
-import './styles/Form.css';
+import firebase from '../FirebaseConfig';
+import '../styles/Form.css';
 
 const Form = ({
   buttonValue,

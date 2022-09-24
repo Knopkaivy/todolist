@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import firebase from './FirebaseConfig';
-import './styles/Todo.css';
+import firebase from '../FirebaseConfig';
+import '../styles/Todo.css';
 
 const Todo = ({
   completed,

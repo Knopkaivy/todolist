@@ -2,7 +2,7 @@ import React from 'react';
 import Todo from './Todo';
 import Form from './Form';
 import LoadingSpinner from './LoadingSpinner';
-import './styles/TodoList.css';
+import '../styles/TodoList.css';
 
 const TodoList = ({
   handleAddTodo,
@@ -12,7 +12,6 @@ const TodoList = ({
   editItem,
   isLoading,
   todos,
-  user,
 }) => {
   let itemList = [];
 
