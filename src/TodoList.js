@@ -12,6 +12,7 @@ const TodoList = ({
   editItem,
   isLoading,
   todos,
+  user,
 }) => {
   let itemList = [];
 
@@ -43,19 +44,21 @@ const TodoList = ({
   }
 
   return (
-    <section className="TodoList">
-      <h1>Todo List</h1>
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : (
-        <ul className="TodoList__ul">{itemList}</ul>
-      )}
-      <Form
-        handleAddTodo={handleAddTodo}
-        placeholder="Do New Things"
-        buttonValue="Add"
-      />
-    </section>
+    <>
+      <section className="TodoList">
+        <h1>Todo List</h1>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <ul className="TodoList__ul">{itemList}</ul>
+        )}
+        <Form
+          handleAddTodo={handleAddTodo}
+          placeholder="Do New Things"
+          buttonValue="Add"
+        />
+      </section>
+    </>
   );
 };
 

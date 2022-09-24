@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firestore from './FirebaseConfig';
-import FirebaseAuthService from './FirebaseAuthService';
 import FirebaseFirestoreService from './FirebaseFirestoreService';
 import { v4 as uuidv4 } from 'uuid';
 import { starterTodos } from './starter';
+import Nav from './Nav';
 import Login from './Login';
 import Register from './Register';
 import Reset from './Reset';
@@ -150,28 +150,7 @@ function App() {
       <div className="bg__container">
         <img src={BgImage} alt="decorative background" className="bg__image" />
       </div>
-      <nav className="nav">
-        <div className="nav__container">
-          <div className="nav__itemContainer">
-            {user ? (
-              <>
-                <div className="nav__item">{user.displayName}</div>
-                <button
-                  type="button"
-                  onClick={FirebaseAuthService.logoutUser}
-                  className="btn btn__logout nav__item nav__item-hidden"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <NavLink to="login" className="nav__item NavLink">
-                Login
-              </NavLink>
-            )}
-          </div>
-        </div>
-      </nav>
+      <Nav user={user} />
       <div className="container">
         <Routes>
           <Route
@@ -185,6 +164,7 @@ function App() {
                 editItem={editItem}
                 isLoading={isLoading}
                 todos={todos}
+                user={user}
               />
             }
           />

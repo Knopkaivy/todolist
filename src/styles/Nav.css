@@ -1,0 +1,48 @@
+.Nav {
+  height: 4rem;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+}
+.Nav__container {
+  height: 100%;
+  width: 100%;
+  min-width: 375px;
+  max-width: 30rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.Nav__itemContainer {
+  min-width: 8rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.Nav__item {
+  padding: 0 2rem;
+  font-size: 1.1rem;
+}
+.Nav__item-hidden {
+  padding: 0 2rem;
+  position: absolute;
+  top: -4rem;
+  transition: all 0.75s ease;
+}
+.Nav__itemContainer:active .Nav__item-hidden,
+.Nav__itemContainer:focus .Nav__item-hidden,
+.Nav__itemContainer:hover .Nav__item-hidden,
+.Nav__item-hidden:active,
+.Nav__item-hidden:focus,
+.Nav__item-hidden:hover {
+  top: 4rem;
+}
+.NavLink {
+  color: inherit;
+  text-decoration: none;
+}
