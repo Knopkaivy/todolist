@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Make sure the uid of the requesting user matches name of the user
+    // document. The wildcard expression {userId} makes the userId variable
+    // available in rules.
+    
+    match /users/{userId} {
+    
+      allow read, update, delete: if request.auth != null && request.auth.uid == userId;
+      allow create, list: if request.auth != null;
+      
+    }
+    match /users/{document=**} {
+    
+     // Sanitazation of request
+    function todoHasOnlyAllowedFields(){
+    	let requiredFields = ['completed', 'editMode', 'id', 'publishDate', 'text'];
+    	let keys = request.resource.data.keys();
+    	return keys.hasAll(requiredFields) && keys.hasOnly(requiredFields);
+    }
+    
+    // Validation of request
+    function isTodoValid(){
+    	let data = request.resource.data;
+      return data.completed is bool && 
+      data.editMode is bool &&
+      data.id is string && data.id != '' &&
+      data.publishDate is timestamp &&
+      data.text is string && data.text != ''
+    }
+    
+      allow read, delete: if request.auth != null;
+      allow create, update: if request.auth != null && todoHasOnlyAllowedFields() && isTodoValid();
+    }
+  }
+}
