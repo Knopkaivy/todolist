@@ -11,7 +11,10 @@ const Register = () => {
   const [user, loading] = useAuthState(firebase.auth);
   const navigate = useNavigate();
   const register = () => {
-    if (!name) alert('Please enter name');
+    if (!name) {
+      alert('Please enter name');
+      return;
+    }
     FirebaseAuthService.registerUser(name, email, password);
   };
   useEffect(() => {
