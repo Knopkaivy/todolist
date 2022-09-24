@@ -116,6 +116,7 @@ body {
 }
 .inpt__auth {
   margin-bottom: 10px;
+  width: 16rem;
 }
 .btn {
   border: none;
@@ -135,6 +136,7 @@ body {
 .btn__auth {
   margin-bottom: 10px;
   font-size: inherit;
+  width: 16rem;
 }
 .btn__logout {
   color: inherit;
