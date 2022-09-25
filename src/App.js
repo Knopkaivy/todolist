@@ -32,7 +32,7 @@ function App() {
 
   useEffect(() => {
     window.scrollTo(0, 1);
-  }, []);
+  });
 
   const fetchTodos = async (cursorId = '') => {
     const queries = [];
