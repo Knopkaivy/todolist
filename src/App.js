@@ -30,6 +30,10 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
+  useEffect(() => {
+    window.scrollTo(0, 1);
+  }, []);
+
   const fetchTodos = async (cursorId = '') => {
     const queries = [];
     const orderByField = 'publishDate';
