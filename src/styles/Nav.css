@@ -1,7 +1,7 @@
 .Nav {
   height: 4rem;
-  position: fixed;
-  top: 0;
+  /* position: fixed; */
+  /* top: 0; */
   width: 100vw;
   z-index: 1;
 }
@@ -33,6 +33,7 @@
   position: absolute;
   top: -4rem;
   transition: all 0.75s ease;
+  z-index: 1;
 }
 .Nav__itemContainer:active .Nav__item-hidden,
 .Nav__itemContainer:focus .Nav__item-hidden,
